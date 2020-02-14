@@ -10,7 +10,7 @@ struct Node
 class DynamicStack
 {
 private:
-    int size; 
+    int size = 0; 
     Node* sp = nullptr;
 public:
     DynamicStack(/* args */);

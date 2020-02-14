@@ -14,7 +14,6 @@ DynamicStack::~DynamicStack() {
 
 void DynamicStack::addNumber(int new_number) {
     Node* pTemp = new Node();
-    cout << "Enter new number\n";
     pTemp -> data = new_number;
     pTemp -> next = this -> sp;
     this -> sp = pTemp;
@@ -36,10 +35,11 @@ void DynamicStack::removeTop() {
     Node* pTemp = sp;
     sp = sp -> next;    
     delete pTemp;
+    this -> size--;
 }
 
 void DynamicStack::printSize() {
-    
+    cout << "\nSize of stack: " << size << endl;
 }
 
 bool DynamicStack::isEmpty() {
