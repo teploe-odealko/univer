@@ -1,0 +1,12 @@
+{
+    "problems.showCurrentInStatus": true,
+    "C_Cpp.errorSquiggles": "Enabled",
+    "files.associations": {
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "array": "cpp",
+        "*.tcc": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp"
+    }
+}
