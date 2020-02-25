@@ -66,8 +66,26 @@ bool LinkedList<T>::removeItem(T item_to_remove) {
         currentSize--;
         return true;
     }
-
 }
+
+template <typename T> 
+void LinkedList<T>::removeAll() {
+    NodeLL<T>* pPrev = pHead;
+    NodeLL<T>* pCurrent = pHead -> right;
+
+
+    while (pCurrent != pHead)  {
+        pPrev = pCurrent;
+        pCurrent = pCurrent->right;
+        delete pPrev;
+
+
+    }
+
+    delete pCurrent;
+}
+
+
 
 template <typename T> 
 void LinkedList<T>::printSize() {
@@ -102,7 +120,7 @@ bool LinkedList<T>::addAfter(T new_item, T paste_after) {
 
 template <typename T> 
 bool LinkedList<T>::addBefore(T new_item, T paste_before) {
-    NodeLL<T>* pCurrent = findBackward(paste_before);
+    NodeLL<T>* pCurrent = findDirect(paste_before);
     if (pCurrent == pHead){
         return false;
     } else {
@@ -120,3 +138,12 @@ bool LinkedList<T>::addBefore(T new_item, T paste_before) {
     }
 }
 
+
+template <typename T> 
+NodeLL<T>* LinkedList<T>::findDirect(T searchBy){
+    NodeLL<T>* pCurrent = pHead->right;
+    while ((pCurrent != pHead) && (pCurrent->data)!=searchBy) {
+        pCurrent = pCurrent->right;
+    }
+    return pCurrent;
+};

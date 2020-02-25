@@ -21,7 +21,7 @@ void RingQueue::addNumber(int new_number) {
     if (last == &arrayPtr[maxSize]){
         last = arrayPtr;
     } else {
-        last++;
+        ++last;
     }
 
     currentSize++;

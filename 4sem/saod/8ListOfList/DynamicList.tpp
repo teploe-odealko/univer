@@ -70,6 +70,7 @@ template <typename T>
 bool DynamicList<T>::isEmpty() {
     if (pHead -> next == nullptr) return true;
     else return false;
+    
 }
 
 

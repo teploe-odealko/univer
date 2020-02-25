@@ -44,10 +44,9 @@ void ArrayList::showAll() {
 }
 
 
-void ArrayList::removeItem(int index) {
-
-
-    if (currentSize -1 < index){
+void ArrayList::removeItem(int item_to_remove) {
+    int index = findByData(item_to_remove);
+    if (-1 == index){
         cout << endl << index <<" Item does not exist. Last index " << currentSize-1 << endl;  
     } else {
         for (int i=0; i < currentSize - index - 1; i++){
@@ -55,9 +54,6 @@ void ArrayList::removeItem(int index) {
         }
         currentSize--;
     }
-        
-
- 
     
 }
 

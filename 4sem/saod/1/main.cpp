@@ -1,12 +1,15 @@
 #include <iostream>
 #include "DynamicStack.h"
 #include <limits>
+#include <random>
 
 using namespace std;
 
 
 
 int main(){
+    default_random_engine generator;
+    uniform_int_distribution<int> dist1_100(1,100);
     int choice; 
     DynamicStack firstStack;
     DynamicStack secondStack;
@@ -19,7 +22,8 @@ int main(){
         "2) Show all stack\n" <<
         "3) Remove from top of stack \n" <<
         "4) Size of stack\n" <<
-        "5) Is empty?\n\n" << 
+        "5) Is empty?\n" << 
+        "6) Add several items\n\n"
         "Select: ";
 
         cin >> choice;
@@ -36,8 +40,7 @@ int main(){
             if (choice2){
                 if (!secondStack.isEmpty())
                 {
-                    firstStack.addNumber(secondStack.getSp() -> data);
-                    secondStack.removeTop();
+                    firstStack.addNode(secondStack.getTopPtr());
                 } 
                 else
                 {        
@@ -73,9 +76,10 @@ int main(){
                 "1) Move to second Stack\n";
             cin >> choice2;
             if (choice2){
-                secondStack.addNumber(firstStack.getSp() -> data);
+                secondStack.addNode(firstStack.getTopPtr());
+            } else {
+                firstStack.removeTop();
             }
-            firstStack.removeTop();
             
         }else{
             cout << "\nStack is empty. Nothing to remove.\n";
@@ -88,8 +92,18 @@ int main(){
             break;
         case 5:
             cout << "\nIs empty? " << bool(firstStack.isEmpty()) << endl;
+            break;
+
+        case 6:
+            int n, tmpAdd;
+            cout << "Enter amaunt of numbers: ";
+            cin >> n;
+            for (int i = 0; i < n; i++){
+                tmpAdd = dist1_100(generator);
+                firstStack.addNumber(tmpAdd);
+            }
         default:
-    
+
             break;
         }
         

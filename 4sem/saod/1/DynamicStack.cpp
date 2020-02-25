@@ -38,6 +38,21 @@ void DynamicStack::removeTop() {
     this -> size--;
 }
 
+Node* DynamicStack::getTopPtr(){
+    Node* pTemp = sp;
+    sp = sp -> next;
+    size--;
+    return pTemp;
+}
+
+void DynamicStack::addNode(Node* new_node){
+    new_node -> next = this -> sp;
+    this -> sp = new_node;
+    this -> size++;
+}
+
+
+
 void DynamicStack::printSize() {
     cout << "\nSize of stack: " << size << endl;
 }

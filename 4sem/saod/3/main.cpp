@@ -43,10 +43,11 @@ int main(){
 
                 }
             }else{
+                cout << amount_chars <<" items have been removed\n";
+
                 for (int i = 0; i < amount_chars; i++)
                 {
                     myDynamicQueue.removeItem();
-                    cout << amount_chars <<" items have been removed\n";
 
                 }
             }

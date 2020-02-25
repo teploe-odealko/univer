@@ -53,7 +53,6 @@ int main(){
                 cout << "\nEnter the index of the item you want to delete: ";
                 cin >> index;
                 myArrayList.removeItem(index);
-                cout << "Successful!\n";
 
             } else {
                 cout << "\nArray List is empty. Nothing to remove.\n";

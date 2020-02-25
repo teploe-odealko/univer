@@ -9,10 +9,12 @@ GLfloat w=40; //Ширина мирового окна
 GLfloat h; //Высота мирового окна
 GLfloat l, r, b, t; //Параметры мирового окна
 GLfloat f=180.0 ;
+GLfloat s = 1.8;
+bool pulse_count = true;
 void init(void){
     h=w/R; l=-w/2; r=w/2; b=-h/2; t=h/2; //Расчет параметров миро-вого окна
 
-    glClearColor(1.0,1.0,0.0,0.0);
+    glClearColor(1.0,1.0,1.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -42,28 +44,59 @@ void showAxis(void){
 void fig0(void){ 
     glColor3f(0.0,1.0,0.0);
     glBegin(GL_LINE_LOOP);
-    glVertex2f(0.0,0.0);
-    glVertex2f(0.0,3.0);
-    glVertex2f(5.0,2.0);
-    glVertex2f(5.0,0.0);
+    glVertex2f(-4.0,-6.0);
+    glVertex2f(-4.0,6.0);
+    glVertex2f(4.0,6.0);
+    glVertex2f(4.0,-6.0);
+    glEnd();
+
+}
+
+void fig1(void){ 
+    showAxis();
+    glColor3f(0.7,0.1,0.5);
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(0,0.0);
+    glVertex2f(0.0,6.0);
+    glVertex2f(4.0,6.0);
+    glVertex2f(4.0,0.0);
     glEnd();
 
 }
 
 void scene(void){ 
+    
+
     glClear(GL_COLOR_BUFFER_BIT);
     showAxis();
     fig0();
     glPushMatrix();
-    glTranslatef(4.5, 8.0, 0.0);
-    glRotatef(f, 0.0, 0.0, 0.5);
-    glScalef(1.0, -1.0, 1.0);
-    fig0();
+    glTranslatef(4, 6.0, 0.0);
+
+    glRotatef(-30, 0.0, 0.0, .5);
+    glTranslatef(-4, -6.0, 0.0);
+
+    glTranslatef(4, 6.0, 0.0);
+    glScalef(-1,1,0);
+
+
+
+
+    // glScalef(s, s, 1.0);
+    fig1();
     glPopMatrix( );
     glFlush();
     glutSwapBuffers();
-    f+=30; if(f==360) f=0;
-    sleep(1);
+    // f+=1; if(f==360) f=0;
+    // if (pulse_count){
+    //     s += 0.03;
+    //     if (s > 2) pulse_count = !pulse_count;
+    // } else {
+    //     s -= 0.01;
+    //     if (s < 1.8) pulse_count = !pulse_count;
+    // }
+
+    // sleep(1);
 }
 
 int main(int argc, char **argv)

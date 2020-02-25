@@ -52,6 +52,7 @@ bool DynamicList::removeItem(int item_to_remove) {
         if (pPrev->next == nullptr){
             last = pPrev;
         }
+        
         pCurrent->next = sp;
         sp = pCurrent;
         currentSize--;

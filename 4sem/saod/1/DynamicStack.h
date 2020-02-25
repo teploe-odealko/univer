@@ -18,6 +18,8 @@ public:
     void addNumber(int new_number);
     void showAll();
     void removeTop();
+    void addNode(Node*);
+    Node* getTopPtr();
     void printSize();
     bool isEmpty();
     ~DynamicStack();

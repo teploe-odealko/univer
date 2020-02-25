@@ -6,6 +6,18 @@
 using namespace std;
 
 
+int selectSubList(int size){
+    int subListIndex;
+    cout << "\n\nAvailable SUB_lists\n-------------------\n";  // Вывод доступных списков 
+    for (int i = 0; i < size; i++){
+        cout << i << " ";
+    }
+    cout << "\n-------------------\nSelect: ";
+
+    cin >> subListIndex;
+    return subListIndex;
+}
+
 
 int main(){
     int choice = 1;
@@ -38,13 +50,8 @@ int main(){
             if (!generalList.isEmpty()){   // Проверка на пустоту главного списка
                 int subListIndex, new_number, paste_after;
             
-                cout << "\n\nAvailable SUB_lists\n-------------------\n";  // Вывод доступных списков 
-                for (int i = 0; i < generalList.getSize(); i++){
-                    cout << i << " ";
-                }
-                cout << "\n-------------------\nSelect: ";
+                subListIndex = selectSubList(generalList.getSize());
 
-                cin >> subListIndex;
                 while (subListIndex > generalList.getSize()){  // Проверка на корректный выбор списка
                     cout << "\nIndex does not exist\nSelect again: ";
                     cin >> subListIndex;
@@ -71,9 +78,12 @@ int main(){
 
             break;
 
-        // case 3:
-        //     myLinkedList.showAllDirect();
-        //     break;
+        case 3:
+
+            if (!generalList.isEmpty()){
+
+            }
+            break;
             
         case 4:
             if (!generalList.isEmpty()){
@@ -90,12 +100,30 @@ int main(){
 
             break;
 
-        // case 5:
+        case 5:
 
-        //     if (!myLinkedList.isEmpty()){
-        //         int item_to_delete;
-        //         cout << "\nEnter the the item you want to delete: ";
-        //         cin >> item_to_delete;
+            if (!generalList.isEmpty()){
+                int subListIndex = selectSubList(generalList.getSize());
+                LinkedList<int> *pSubList;
+                pSubList = generalList.getItemByIndex(subListIndex);
+                pSubList -> removeAll();
+                generalList.removeItem(subListIndex);
+
+                cout << "Successful!\n";
+
+
+
+            } else {
+                cout << "\nArray List is empty. Nothing to remove.\n";
+            }
+
+            break;
+
+        // case 6:
+
+        //     if (!generalList.isEmpty()){
+        //         int subListIndex = selectSubList(generalList.getSize());
+
         //         bool result = myLinkedList.removeItem(item_to_delete);
         //         if (result) cout << "Successful!\n";
         //         else cout << "Item not found\n";
@@ -104,21 +132,16 @@ int main(){
         //     } else {
         //         cout << "\nArray List is empty. Nothing to remove.\n";
         //     }
-
         //     break;
 
-        // case 6:
-        //     myLinkedList.printSize(); 
-        //     break;
-
-        // default:
+        default:
     
-        //     break;
-        // }
+            break;
+        }
         
     
         }
-    }
+    
     return 0;
 
 }
