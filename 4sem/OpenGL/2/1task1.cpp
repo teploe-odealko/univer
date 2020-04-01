@@ -66,7 +66,9 @@ void scene(void){
     glPopMatrix( );
     glFlush();
     glutSwapBuffers();
+
     f+=1; if(f==360) f=0;
+    
     if (pulse_count){
         s += 0.03;
         if (s > 2) pulse_count = !pulse_count;

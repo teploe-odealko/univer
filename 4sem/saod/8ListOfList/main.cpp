@@ -1,147 +1,153 @@
 #include <iostream>
-#include "LinkedList.h"
-#include "DynamicList.h"
-#include <limits>
+#include "GeneralList.h"
+#include "SubList.h"
+// #include "DynamicList.h"
 
 using namespace std;
 
-
-int selectSubList(int size){
-    int subListIndex;
-    cout << "\n\nAvailable SUB_lists\n-------------------\n";  // Вывод доступных списков 
-    for (int i = 0; i < size; i++){
-        cout << i << " ";
-    }
-    cout << "\n-------------------\nSelect: ";
-
-    cin >> subListIndex;
-    return subListIndex;
-}
-
-
 int main(){
     int choice = 1;
-    DynamicList<LinkedList<int>> generalList;
+    GeneralList generalList;
     
 
-    while (choice != 0){
+    while (choice != 0)
+    {
         cout << "\nSelect action:\n"
         "0) Exit\n"
         "1) Add new SUB_list to GENERAL_List\n"
         "2) Add new item to some SUB_list\n"
-        "3) Find item\n"
-        "4) Show all items\n"
-        "5) Remove SUB_list from GENERAL_list\n"
-        "6) Remove item from SUB_list\n"
+        "3) Show all\n"
+        "4) Remove SUB_list from GENERAL_list\n"
+        "5) Remove item from SUB_list\n"
         "Select: ";
         cin >> choice;
         cout << endl;
+        bool res;
         switch (choice){
+            int SubListId, new_number, find, after_or_before, list_id, item_to_delete;
 
         case 1:
+        {
+            cout << "Enter SUB List ID: ";
+            cin >> list_id;
+            SubList *sublist = new SubList(list_id);
+            if (generalList.isEmpty())
             {
-            LinkedList<int> subList;
-            generalList.pushBack(subList);
-            break;
+                generalList.pushBack(sublist);
             }
-            
+            else
+            {
+                cout << "1) before\n2) after\nSelect: ";
+                cin >> after_or_before;
+                cout << "\nSUB List ID which you want to find: ";
+                cin >> find;
+                res = (after_or_before == 1) ? 
+                    generalList.addBefore(sublist, find) :
+                    generalList.addAfter(sublist, find);
+                if (res)
+                    cout << "SUCESS!!!\n";
+                else
+                    cout << "FAIL!!!\n";
+            }
+            break;
+        }
         case 2:
+            if (generalList.isEmpty())
+            {
+                cout << "GENERAL_list is Empty. Add SUB_list to GENERAL_list (1)\n";
+            }
+            else
+            {
+                res = false;
+                cout << "\nEnter SUB List ID: "; 
+                cin >> SubListId;
+                NodeLL *pSubListNode = generalList.findSubList(SubListId);
 
-            if (!generalList.isEmpty()){   // Проверка на пустоту главного списка
-                int subListIndex, new_number, paste_after;
-            
-                subListIndex = selectSubList(generalList.getSize());
-
-                while (subListIndex > generalList.getSize()){  // Проверка на корректный выбор списка
-                    cout << "\nIndex does not exist\nSelect again: ";
-                    cin >> subListIndex;
+                if (pSubListNode == NULL)
+                {
+                    cout << "No such list!\n";
+                    break;
                 }
-
-                cout << "\nEnter new number to add into SUB_list: "; 
+                cout << "\nEnter new number to add into SUB_list: ";
                 cin >> new_number;
-                LinkedList<int> *pSubList = generalList.getItemByIndex(subListIndex);
-
-                bool result = true;
-                if (pSubList -> isEmpty()){
-                    pSubList -> pushBack(new_number);
-                } else {
-                    cout << "\nEnter the item AFTER which you want to insert a new item: ";
-                    cin >> paste_after;
-                    result = pSubList -> addBefore(new_number, paste_after);
+                SubList *sublist = (pSubListNode->data);
+                if (sublist->isEmpty())
+                {
+                    sublist->pushBack(new_number);
+                    res = true;
                 }
-                
-                if (result) cout << "Successful!\n";
-                else cout << "Item \"" << paste_after << "\" not found. Item was not added to List\n";
-            } else {
-                cout << "GENERAL_list is Empty. Add SUB_list to GENERAL_list (1)\n";
-            }
-
-            break;
-
-        case 3:
-
-            if (!generalList.isEmpty()){
-
+                else
+                {
+                    cout << "1) before\n2) after\nSelect: ";
+                        cin >> after_or_before;
+                    cout << "\nElement which you want to find: ";
+                    cin >> find;
+                    res = (after_or_before == 1) ? 
+                        sublist->addBefore(new_number, find) :
+                        sublist->addAfter(new_number, find);
+                }
+                if (res) cout << "Successful!\n";
+                else cout << "Item \"" << find << "\" not found. Item was not added to List\n";
             }
             break;
             
-        case 4:
-            if (!generalList.isEmpty()){
-                LinkedList<int> *pSubList;
-                for (int i = 0; i < generalList.getSize(); i++){
-                    pSubList = generalList.getItemByIndex(i);
-                    cout << endl << i << "|\n";
-                    pSubList -> showAllDirect();
-                    cout << endl;
-                }
-            } else {
+        case 3:
+            if (generalList.isEmpty())
+            {
                 cout << "GENERAL_list is Empty. Add SUB_list to GENERAL_list (1)\n";
             }
-
+            else
+            {
+                generalList.showAllDirect();
+                cout << endl;
+            }
             break;
 
         case 5:
 
             if (!generalList.isEmpty()){
-                int subListIndex = selectSubList(generalList.getSize());
-                LinkedList<int> *pSubList;
-                pSubList = generalList.getItemByIndex(subListIndex);
-                pSubList -> removeAll();
-                generalList.removeItem(subListIndex);
+                cout << "\nEnter SUB List ID: "; 
+                cin >> SubListId;
+                NodeLL *pSubListNode = generalList.findSubList(SubListId);
 
-                cout << "Successful!\n";
-
-
+                if (pSubListNode == NULL)
+                {
+                    cout << "No such list!\n";
+                    break;
+                }
+                cout << "\nElement to delete: ";
+                cin >> item_to_delete;
+                SubList *sublist = (pSubListNode->data);
+                res = sublist->removeItem(item_to_delete);
+                if (res) cout << "Successful!\n";
+                else cout << "Item not found\n";
 
             } else {
-                cout << "\nArray List is empty. Nothing to remove.\n";
+                cout << "\nList is empty. Nothing to remove.\n";
             }
 
             break;
 
-        // case 6:
+        case 4:
 
-        //     if (!generalList.isEmpty()){
-        //         int subListIndex = selectSubList(generalList.getSize());
-
-        //         bool result = myLinkedList.removeItem(item_to_delete);
-        //         if (result) cout << "Successful!\n";
-        //         else cout << "Item not found\n";
-
-
-        //     } else {
-        //         cout << "\nArray List is empty. Nothing to remove.\n";
-        //     }
-        //     break;
+            if (!generalList.isEmpty())
+            {
+                cout << "\nList ID to delete: ";
+                cin >> item_to_delete;
+                res = generalList.removeItem(item_to_delete);
+                if (res) cout << "Successful!\n";
+                else cout << "Item not found\n";
+            }
+            else 
+            {
+                cout << "\nList is empty. Nothing to remove.\n";
+            }
+            break;
 
         default:
     
             break;
         }
-        
-    
-        }
-    
+    }
     return 0;
-
 }

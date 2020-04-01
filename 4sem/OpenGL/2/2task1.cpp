@@ -11,6 +11,8 @@ GLfloat l, r, b, t; //Параметры мирового окна
 GLfloat f=180.0 ;
 GLfloat s = 1.8;
 bool pulse_count = true;
+int isMirrored = -1; 
+int angle = 0;
 void init(void){
     h=w/R; l=-w/2; r=w/2; b=-h/2; t=h/2; //Расчет параметров миро-вого окна
 
@@ -71,11 +73,14 @@ void scene(void){
     showAxis();
     fig0();
     glPushMatrix();
-    glTranslatef(4, 6.0, 0.0);
 
+    glRotatef(angle, 0, 0, 1);
+    glScalef(isMirrored, 1, 0);
+
+
+    glTranslatef(4, 6.0, 0.0);
     glRotatef(-30, 0.0, 0.0, .5);
     glTranslatef(-4, -6.0, 0.0);
-
     glTranslatef(4, 6.0, 0.0);
     glScalef(-1,1,0);
 
@@ -84,19 +89,26 @@ void scene(void){
 
     // glScalef(s, s, 1.0);
     fig1();
+
     glPopMatrix( );
     glFlush();
     glutSwapBuffers();
-    // f+=1; if(f==360) f=0;
-    // if (pulse_count){
-    //     s += 0.03;
-    //     if (s > 2) pulse_count = !pulse_count;
-    // } else {
-    //     s -= 0.01;
-    //     if (s < 1.8) pulse_count = !pulse_count;
-    // }
+    
 
-    // sleep(1);
+    if ((isMirrored == -1) && (angle == 0)){
+        isMirrored = -1;
+        angle = 113;
+    } else if ((isMirrored == -1) && (angle == 113)){
+        isMirrored = 1;
+        angle = -113;
+    } else if ((isMirrored == 1) && (angle == -113)){
+        isMirrored = 1;
+        angle = 0;
+    } else if ((isMirrored == 1) && (angle == 0)){
+        isMirrored = -1;
+        angle = 0;
+    }
+    sleep(1);
 }
 
 int main(int argc, char **argv)

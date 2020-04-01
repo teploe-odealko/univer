@@ -13,23 +13,28 @@ template <typename T>
 class LinkedList
 {
 private:
-    NodeLL<T>* pHead;
+
     int currentSize = 0;
-
-
-
+    
+    
+    
 public:
+    NodeLL<T>* pHead;
+    int id;
     LinkedList();
-    NodeLL<T>* findDirect(T);
-    bool addAfter(T, T) ;
-    bool addBefore(T, T);
-    void pushBack(T);
+    LinkedList(int);
+    NodeLL<LinkedList<int>> *findSubList(int);
+    NodeLL<int> *findItem(int);
+    bool addAfter(T&, int);
+    bool addBefore(T&, int);
+    void pushBack(T&, int);
+    void pushBack(T&);
+    int getSize();
     void showAllDirect();
+    void showAllDirect(int);
     void showAllBackward();
     bool removeItem(T);
     void removeAll();
-    void printSize();
-    
     bool isEmpty();
     ~LinkedList();
 

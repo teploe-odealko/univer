@@ -13,37 +13,51 @@ void init(void)
     glLoadIdentity( );
 }
 
-void myDisplay( )
+void myDisplayIcos( )
 
 { 
     glPushMatrix( ); //Сохраняем VM = 1
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
-    gluLookAt(2, 6, 6, 0, 0, 0, 0, 1, 0); // VM=Fwe
-    GLfloat myLightPosition[] = {3.0, 3.0, 3.0, 1.0}; // Источник света в CK
-    glLightfv(GL_LIGHT0, GL_POSITION, myLightPosition);
+    gluLookAt(3, 2, 1, 0, 0, 0, 0, 1, 0); // VM=Fwe
+    // GLfloat myLightPosition[] = {3.0, 3.0, 3.0, 1.0}; // Источник света в CKw
+    // glLightfv(GL_LIGHT0, GL_POSITION, myLightPosition); /*Позиция ис-точника света будет преобразована в CKe*/
+    // glEnable(GL_LIGHTING);
+    // glEnable(GL_LIGHT0);
+    glPushMatrix(); //Сохраняем VM=Fwe
+    glRotatef(angle, 1, 0, 0); // VM=Fwe*R
+    // glRotatef(angle, 0, 1, 0); // VM=Fwe*R*R
+    // glRotatef(angle, 0, 0, 1); // VM=Fwe*R*R*R
 
-    GLfloat myAmbient[] = {0.19125, 0.0735, 0.0225, 1};
-    GLfloat myDiffuse[] = {0.7038, 0.27048, 0.0828, 1};
-    GLfloat mySpecular[] = {0.256777, 0.137622, 0.086014, 1};
-    
-    glLightfv(GL_LIGHT0, GL_AMBIENT, myAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, myDiffuse);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, mySpecular);
-    glLightf(GL_LIGHT0, GL_SHININESS, 12.8);
-    // glPushMatrix();
-    //     glRotatef(angle, 0, 1, 0); // вращаем источник света
-    //     // glTranslatef(); // перемещаем источник света
-    //     glLightfv(GL_LIGHT0, GL_POSITION, myLightPosition);
+    glBegin(GL_TRIANGLES);
+        glTexCoord2f(0, 1); glVertex3f(1, 1, 1);
+        glTexCoord2f(0, 0); glVertex3f(0, 0, 0);
+        glTexCoord2f(1, 0); glVertex3f(1, 1, 0);
+    glEnd();
 
-    //     glBegin(GL_LINES);
-    //         glColor3f(1,1,1); glVertex3f(3, 3, 3); glVertex3f(0.0, 0.0, 0.0);
-    //     glEnd();
-    // glPopMatrix();
-    // glBegin(GL_LINES);
-    //     glColor3f(1,1,1); glVertex3f(3, 3, 3); glVertex3f(0.0, 0.0, 0.0);
-    // glEnd();
+    glPopMatrix( ); // Восстанавливаем VM=Fwe
+    glDisable(GL_LIGHTING); //Выключаем освещение
+    glBegin(GL_LINES);
+    glColor3f(1,0,0 ); glVertex3f(0, 0, 0); glVertex3f(2, 0, 0);
+    glColor3f(0,1,0 ); glVertex3f(0, 0, 0); glVertex3f(0, 2, 0);
+    glColor3f(0,0,1 ); glVertex3f(0, 0, 0); glVertex3f(0, 0, 2);
+    glEnd();
+    glBegin(GL_LINES);
+    glColor3f(1,1,1); glVertex3f(3, 3, 3); glVertex3f(0.0, 0.0, 0.0);
+    glEnd();
+    glPopMatrix( );
+    glutSwapBuffers( );
+}
 
+void myDisplayDodec( )
+
+{ 
+    glPushMatrix( ); //Сохраняем VM = 1
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
+    gluLookAt(3, 2, 1, 0, 0, 0, 0, 1, 0); // VM=Fwe
+    GLfloat myLightPosition[] = {3.0, 3.0, 3.0, 1.0}; // Источник света в CKw
+    glLightfv(GL_LIGHT0, GL_POSITION, myLightPosition); /*Позиция ис-точника света будет преобразована в CKe*/
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glPushMatrix(); //Сохраняем VM=Fwe
@@ -51,66 +65,21 @@ void myDisplay( )
     // glRotatef(angle, 0, 1, 0); // VM=Fwe*R*R
     // glRotatef(angle, 0, 0, 1); // VM=Fwe*R*R*R
 
-    glBegin(GL_POLYGON);
-
-    glNormal3f(0, 0, -1);
-    glVertex3f(0, 0, 0);
-    glVertex3f(2, 1, 0);
-    glVertex3f(2, -1, 0);
-    glEnd();
-    // грань f1
-    glBegin(GL_POLYGON);
-    glNormal3f(0, 0, 1);
-    glVertex3f(0.5, 0, 1);
-    glVertex3f(1.5, 0.5, 1);
-    glVertex3f(1.5, -0.5, 1);
-    glEnd();
-    // // грань f2
-    glBegin(GL_POLYGON);
-    glNormal3f(1, 2, 0.5);
-    glVertex3f(0, 0, 0);
-    glVertex3f(2, 1, 0);
-    glVertex3f(1.5, 0.5, 1);
-    glVertex3f(0.5, 0, 1);
-
-    glEnd();
-    // грань f3
-    glBegin(GL_POLYGON);
-    glNormal3f(0, -1, 0);
-    glVertex3f(2, -1, 0);
-    glVertex3f(1.5, -0.5, 1);
-    glVertex3f(1.5, 0.5, 1);
-    glVertex3f(2, 1, 0);
-    glEnd();
-
-
-    glBegin(GL_POLYGON);
-    glNormal3f(0, -1, 0);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0.5, 0, 1);
-    glVertex3f(1.5, -0.5, 1);
-    glVertex3f(2, -1, 0);
-    glEnd();
+    glutSolidDodecahedron ();
 
     glPopMatrix( ); // Восстанавливаем VM=Fwe
     glDisable(GL_LIGHTING); //Выключаем освещение
-
-    
     glBegin(GL_LINES);
     glColor3f(1,0,0 ); glVertex3f(0, 0, 0); glVertex3f(2, 0, 0);
     glColor3f(0,1,0 ); glVertex3f(0, 0, 0); glVertex3f(0, 2, 0);
     glColor3f(0,0,1 ); glVertex3f(0, 0, 0); glVertex3f(0, 0, 2);
     glEnd();
-
-
-    // glBegin(GL_LINES);
-    // glColor3f(1,1,1); glVertex3f(3, 3, 3); glVertex3f(0.0, 0.0, 0.0);
-    // glEnd();
+    glBegin(GL_LINES);
+    glColor3f(1,1,1); glVertex3f(3, 3, 3); glVertex3f(0.0, 0.0, 0.0);
+    glEnd();
     glPopMatrix( );
     glutSwapBuffers( );
 }
-
-
 
 void myReshape(int width, int height)
 { 
@@ -120,7 +89,7 @@ void myReshape(int width, int height)
 
 void myIdleMove( )
 { 
-    angle+=2;
+    angle+=0.5;
     if(angle > 360.0) angle=0;
     glutPostRedisplay( );
 }
@@ -157,7 +126,7 @@ int main(int argc, char* argv[])
     glutInitWindowSize(800, 800);
     glutInitWindowPosition(0, 0);
     glutCreateWindow("my window");
-    glutDisplayFunc(myDisplay);
+    glutDisplayFunc(myDisplayIcos);
     glutReshapeFunc(myReshape);
 
     glutKeyboardFunc(onKeyboard);
