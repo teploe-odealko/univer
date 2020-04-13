@@ -14,7 +14,6 @@ void init(void)
 }
 
 void myDisplay( )
-
 { 
     glPushMatrix( ); //Сохраняем VM = 1
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -35,9 +34,6 @@ void myDisplay( )
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glPushMatrix(); //Сохраняем VM=Fwe
-    // glRotatef(0, 1, 0, 0); // VM=Fwe*R
-    // glRotatef(angle, 0, 1, 0); // VM=Fwe*R*R
-    // glRotatef(angle, 0, 0, 1); // VM=Fwe*R*R*R
 
     glBegin(GL_POLYGON);
 
@@ -79,10 +75,6 @@ void myDisplay( )
     glColor3f(0,0,1 ); glVertex3f(0, 0, 0); glVertex3f(0, 0, 2);
     glEnd();
 
-
-    // glBegin(GL_LINES);
-    // glColor3f(1,1,1); glVertex3f(3, 3, 3); glVertex3f(0.0, 0.0, 0.0);
-    // glEnd();
     glPopMatrix( );
     glutSwapBuffers( );
 }
@@ -102,29 +94,7 @@ void myIdle( )
     glutPostRedisplay( );
 }
 
-// void myIdleStatic() { }
-
-// void onKeyboard(unsigned char key, int x, int){
-//     if (key == 'X'){
-//         glutIdleFunc(myIdleStatic);
-
-//     } else if (key == 'x'){
-//         glutIdleFunc(myIdleMove);
-//     }
-//     glutPostRedisplay( );
-
-// }
-
-// void onMouse(int button, int state, int x, int y){
-//     if(button == GLUT_LEFT_BUTTON){
-//         glutDisplayFunc(myDisplayDodec);
-
-//     } else if ( button == GLUT_RIGHT_BUTTON){
-//         glutDisplayFunc(myDisplayIcos);
-//     }
-//     glutPostRedisplay( );
-
-// }
+void myIdleStatic() { }
 
 int main(int argc, char* argv[])
 
@@ -136,9 +106,6 @@ int main(int argc, char* argv[])
     glutCreateWindow("my window");
     glutDisplayFunc(myDisplay);
     glutReshapeFunc(myReshape);
-
-    // glutKeyboardFunc(onKeyboard);
-    // glutMouseFunc(onMouse);
 
     glutIdleFunc(myIdle);
     init( );

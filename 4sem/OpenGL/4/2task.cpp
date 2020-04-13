@@ -106,7 +106,7 @@ void myDisplay( )
     // glBegin(GL_LINES);
     // glColor3f(1,1,1); glVertex3f(3, 3, 3); glVertex3f(0.0, 0.0, 0.0);
     // glEnd();
-    glPopMatrix( );
+    // glPopMatrix( );
     glutSwapBuffers( );
 }
 
@@ -127,27 +127,16 @@ void myIdleMove( )
 
 void myIdleStatic() { }
 
-void onKeyboard(unsigned char key, int x, int){
+void onKeyboard(unsigned char key, int, int){
     if (key == 'X'){
         glutIdleFunc(myIdleStatic);
 
     } else if (key == 'x'){
-        glutIdleFunc(myIdleMove);
+        glutIdleFunc(myIdleStatic);
     }
     glutPostRedisplay( );
 
 }
-
-// void onMouse(int button, int state, int x, int y){
-//     if(button == GLUT_LEFT_BUTTON){
-//         glutDisplayFunc(myDisplayDodec);
-
-//     } else if ( button == GLUT_RIGHT_BUTTON){
-//         glutDisplayFunc(myDisplayIcos);
-//     }
-//     glutPostRedisplay( );
-
-// }
 
 int main(int argc, char* argv[])
 
