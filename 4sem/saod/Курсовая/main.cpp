@@ -2,10 +2,11 @@
 #include "OperatorsList.h"
 #include "UsersList.h"
 #include <string>
-
+#include <windows.h>
 using namespace std;
 
 int main(){
+    setlocale(LC_ALL, "Russian");
     int choice = 1;
     OperatorsList operatorsList;
     
