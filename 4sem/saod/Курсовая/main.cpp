@@ -5,8 +5,31 @@
 #include <windows.h>
 using namespace std;
 
+class ConsoleCP
+{
+    int oldin;
+    int oldout;
+
+public:
+    ConsoleCP(int cp)
+    {
+        oldin = GetConsoleCP();
+        oldout = GetConsoleOutputCP();
+        SetConsoleCP(cp);
+        SetConsoleOutputCP(cp);
+    }
+
+    // поскольку мы изменили свойства внешнего объекта — консоли, нам нужно
+    // вернуть всё как было (если программа вылетит, пользователю не повезло)
+    ~ConsoleCP()
+    {
+        SetConsoleCP(oldin); 
+        SetConsoleOutputCP(oldout);
+    }
+};
+
 int main(){
-    setlocale(LC_ALL, "Russian");
+    ConsoleCP cp(1251);
     int choice = 1;
     OperatorsList operatorsList;
     

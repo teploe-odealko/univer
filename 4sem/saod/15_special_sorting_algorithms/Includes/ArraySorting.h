@@ -25,10 +25,8 @@ public:
     ArraySorting();
     void zero_values();
     void print_array(int[], int);
-    void bubble_sorting(int[], int);
-    void insertion_sorting(int[], int);
-    void sorting_by_choice(int[], int);
-    void shell_sort(int[], int);
-    void quick_sort(int[], int, int);
-    void pyramid_sorting(int[], int);
+    void pocket_sorting_suppurted_array(int[], int[], int);
+    void pocket_sorting(int[], int);
+    void pocket_sorting_same_keys(int[], int, int);
+    void k_bit_sorting(int[], int, int);
 };

@@ -1,5 +1,10 @@
 #pragma once
+#include <string>
+#include <iostream>
 #define Tree_h
+using namespace std;
+
+// #include <stdlib.h>
 
 // struct TreeNode
 // {
@@ -8,9 +13,9 @@
 //     int data;
 //     int counter = 0;
     
-// };q
+// };
 
-class ArraySorting
+class HashTable
 {
 private:
     // int n_vertices;
@@ -19,16 +24,18 @@ private:
     int swaps;
     int comparisons;
     void sito(int arr[], int len, int i);
+    string hash_table[10];
+    string key_words[10] = {"endl", "int", "return",
+    "string", "void", "catch", "progma", "for", "bool", "include"};
     
     
 public:
-    ArraySorting();
+    HashTable();
+    int hash_func(string);
     void zero_values();
     void print_array(int[], int);
-    void bubble_sorting(int[], int);
-    void insertion_sorting(int[], int);
-    void sorting_by_choice(int[], int);
-    void shell_sort(int[], int);
-    void quick_sort(int[], int, int);
-    void pyramid_sorting(int[], int);
+    void print();
+    int find(string);
+    // void pocket_sorting(int[], int);
+    
 };

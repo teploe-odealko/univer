@@ -17,11 +17,11 @@ int main(){
     int len;
     while (choice != 0){
         cout << "\nSelect action:\n"
-        "0) Выход\n"
-        "1) Сортировка массива размером 10\n"
-        "2) Сортировка массива размером 100\n"
-        "3) Сортировка массива размером 1000\n"
-        "4) Сортировка массива размером 10000\n"
+        "0) Exit\n"
+        "1) sort an array of size 10\n"
+        "2) sort an array of size 100\n"
+        "3) sort an array of size 1000\n"
+        "4) sort an array of size 10000\n"
         "Выбрать: ";
         cin >> choice;
         if (choice > 4)
@@ -32,7 +32,7 @@ int main(){
         int arr_copy[len];
         for (int i = 0; i < len; i++)
             arr[i] = generate_int();
-        cout << "Исходный массив: \n";
+        cout << "original array: \n";
         for (auto const& val: arr)
             cout << val << " ";
         cout << endl;
@@ -42,18 +42,19 @@ int main(){
 
         copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));
         sorting.shell_sort(arr_copy, len);
-        cout << "\nМетод Шелла: \n";
+        cout << "\nShell sorting: \n";
         sorting.print_array(arr_copy, len);
 
         copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));
+        sorting.zero_values();
         sorting.quick_sort(arr_copy, 0, len-1);
-        cout << "\nБыстрая сортировка: \n";
+        cout << "\nQuick_sorting: \n";
         sorting.print_array(arr_copy, len);
 
-        // copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));
-        // sorting.sorting_by_choice(arr_copy, len);
-        // cout << "\nВыбором: \n";
-        // sorting.print_array(arr_copy, len);
+        copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));
+        sorting.pyramid_sorting(arr_copy, len);
+        cout << "\nPyramid sorting: \n";
+        sorting.print_array(arr_copy, len);
 
     }
     return 0;

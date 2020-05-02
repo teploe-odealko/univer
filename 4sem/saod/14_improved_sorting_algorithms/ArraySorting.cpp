@@ -8,12 +8,11 @@ ArraySorting::ArraySorting(){}
 
 void ArraySorting::print_array(int arr[], int len)
 {
-    // cout << endl;
     for (int i = 0; i < len; i++)
         cout << arr[i] << " ";
     cout << endl ;
-    cout << "Перестановок - " << swaps << endl 
-         << "Сравнений    - " << comparisons << endl;
+    cout << "Swaps - " << swaps << endl 
+         << "Comparisons    - " << comparisons << endl;
     
 }
 
@@ -51,7 +50,7 @@ void ArraySorting::insertion_sorting(int arr[], int len)
         {
             // cout << arr[j] << " " << temp << endl;
             arr[j+1] = arr[j];
-            j = j - 1;
+            j--;
             swaps++;
             comparisons++;
             
@@ -66,24 +65,24 @@ void ArraySorting::insertion_sorting(int arr[], int len)
 void ArraySorting::sorting_by_choice(int arr[], int len)
 {
     swaps = 0, comparisons = 0;
-    int min;
+    int max;
     int k;
     for (int i = 0; i < len-1; i++)
     {
         k = i;
-        min = arr[i];
+        max = arr[i];
         for (int j = i+1; j < len; j++)
         {
             comparisons++;
-            if (min > arr[j])
+            if (max > arr[j])
             {
                 k = j;
-                min = arr[j];
+                max = arr[j];
             }
         }
         swaps++;
         arr[k] = arr[i];
-        arr[i] = min;
+        arr[i] = max;
     }
 }
 
@@ -130,14 +129,21 @@ void ArraySorting::quick_sort(int arr[], int left, int right)
     do
     {
         while (arr[i] < sred)
+        {
             i++;
+            comparisons++;
+        }
         while (arr[j] > sred)
+        {
             j--;
+            comparisons++;
+        }
         if (i <= j)
         {
             temp = arr[i];
             arr[i] = arr[j];
             arr[j] = temp;
+            swaps++;
             i++;
             j--;
         }
@@ -147,4 +153,57 @@ void ArraySorting::quick_sort(int arr[], int left, int right)
         quick_sort(arr, left, j);
     if (i < right)
         quick_sort(arr, i, right);
+}
+
+
+void ArraySorting::sito(int arr[], int len, int i)
+{
+    int max = i;  
+    int tmp;
+
+    int l = 2*i + 1; // левый потомок
+    int r = 2*i + 2; // правый потомок
+
+
+    comparisons++;
+    if (l < len && arr[l] > arr[max])
+        max = l;
+
+    comparisons++;
+    if (r < len && arr[r] > arr[max])
+        max = r;
+
+    // Если самый большой элемент не корень
+    if (max != i)
+    {
+        tmp = arr[i];
+        arr[i] = arr[max];
+        arr[max] = tmp;
+        swaps++;
+        sito(arr, len, max);
+    }
+}
+
+void ArraySorting::pyramid_sorting(int arr[], int len)
+{
+    int tmp;
+    swaps = 0, comparisons = 0;
+
+    for (int i = len / 2 - 1; i >= 0; i--)
+        sito(arr, len, i);
+
+    for (int i=len-1; i>=0; i--)
+    {
+        tmp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = tmp;
+        swaps++;
+        sito(arr, i, 0);
+    }
+}
+
+void ArraySorting::zero_values()
+{
+    comparisons = 0;
+    swaps = 0;
 }
