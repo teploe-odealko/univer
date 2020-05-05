@@ -10,12 +10,12 @@ int main(){
 
     while (choice != 0){
         cout << "\nSelect action:\n"
-        "0) Выход\n"
-        "1) Поиск вершины\n"
-        "2) Добавление вершины\n"
-        "3) Вывод дерева\n"
-        "4) Уничтожение заданной вершины\n"
-        "Выбрать: ";
+        "0) Exit\n"
+        "1) Search for a vertex\n"
+        "2) Adding a vertex\n"
+        "3) The output of the tree\n"
+        "4) The destruction of the given node\n"
+        "Select: ";
 
         cin >> choice;
         TreeNode* search_res = nullptr;
@@ -28,26 +28,26 @@ int main(){
 
         case 1:
             {
-            cout << "Введите значение для поиска: ";
+            cout << "Enter the value to search for: ";
             cin >> search_value;
             tree->search(search_res, tree->pRoot, search_value, false);
             if (search_res != nullptr)
-                cout << "Элемент \"" << search_res->data << 
-                "\" встречается " << search_res->counter << " раз";
+                cout << "The Item \"" << search_res->data << 
+                "\" occurs " << search_res->counter << " times";
             else
-                cout << "\nТакого элемента в дереве не найдено\n";
+                cout << "\nNo such element was found in the tree :(\n";
             
             break;
             }
         case 2:
             
-            cout << "\nВведите значение для добавления в дерево: ";
+            cout << "\nEnter a value to add to the tree: ";
             cin >> insert_value;
             int ch;
             cout << endl <<
-                "0) Итеративный метод\n"
-                "1) Рекурсивный метод\n"
-                "Выбрать: ";
+                "0) Iterative method\n"
+                "1) Recursive method\n"
+                "Select: ";
             cin >> ch;
             if (ch == 0)
                 tree->add_node_iterative(insert_value);
@@ -86,16 +86,16 @@ int main(){
         case 3:
             if (tree->pRoot == nullptr)
             {
-                cout << "\nДерево пустое\n";
+                cout << "\nThe tree is empty\n";
                 break ;
             }
             int pass;
             cout << endl <<
-                        "0) В строчку\n"
-                        "1) Обратный-симметричный обход\n"
-                        "Выбрать: ";
+                        "0) in line\n"
+                        "1) Reverse-symmetric\n"
+                        "Select: ";
             cin >> pass;
-            cout << "\n\n Дерево:\n-----------------------\n\n"; 
+            cout << "\n\n Tree:\n-----------------------\n\n"; 
             if (pass == 0)
                 tree->inline_out(tree->pRoot, 0);
             else if (pass == 1)
@@ -105,14 +105,14 @@ int main(){
             
         case 4:
             
-            cout << "\nВведите значение вершины для удаления: ";
+            cout << "\nEnter the vertex value to delete: ";
             cin >> to_remove;
             res = false;
             tree->destr_vert(tree->pRoot, to_remove, res);
             if (res)
-                cout << "\nВешрина успешно удалена\n";
+                cout << "\nVertex was successfully deleted :)\n";
             else 
-                cout << "\nВешрина не найдена\n";
+                cout << "\nVertex was not found :(\n";
             // tree->pRoot = nullptr;
             break;
         }

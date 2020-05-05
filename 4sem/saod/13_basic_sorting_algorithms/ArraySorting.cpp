@@ -11,8 +11,8 @@ void ArraySorting::print_array(int arr[], int len)
     for (int i = 0; i < len; i++)
         cout << arr[i] << " ";
     cout << endl ;
-    cout << "Перестановок - " << swaps << endl 
-         << "Сравнений    - " << comparisons << endl;
+    cout << "swaps - " << swaps << endl 
+         << "comparisons    - " << comparisons << endl;
     
 }
 

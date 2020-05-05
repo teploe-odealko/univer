@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-#include <windows.h>
 using namespace std;
 
 OperatorsList::OperatorsList()
@@ -24,7 +23,7 @@ void OperatorsList::show_all()
     while (current_list != pHead)
     {
         subList = current_list->data;
-        cout << "Оператор \"" << subList->operator_name << "\"" << endl;
+        cout << "Operator \"" << subList->operator_name << "\"" << endl;
         subList->show_all_users();
         cout << "----------------\n";
         current_list = current_list->right;

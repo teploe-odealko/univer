@@ -17,12 +17,12 @@ int main(){
     int len;
     while (choice != 0){
         cout << "\nSelect action:\n"
-        "0) Выход\n"
-        "1) Сортировка массива размером 10\n"
-        "2) Сортировка массива размером 100\n"
-        "3) Сортировка массива размером 1000\n"
-        "4) Сортировка массива размером 10000\n"
-        "Выбрать: ";
+        "0) Exit\n"
+        "1) Sorting an array by size 10\n"
+        "2) Sorting an array by size 100\n"
+        "3) Sorting an array by size 1000\n"
+        "4) Sorting an array by size 10000\n"
+        "Select: ";
         cin >> choice;
         if (choice > 4)
             continue;
@@ -32,7 +32,7 @@ int main(){
         int arr_copy[len];
         for (int i = 0; i < len; i++)
             arr[i] = generate_int();
-        cout << "Исходный массив: \n";
+        cout << "Original array: \n";
         for (auto const& val: arr)
             cout << val << " ";
         cout << endl;
@@ -42,17 +42,17 @@ int main(){
 
         copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));
         sorting.bubble_sorting(arr_copy, len);
-        cout << "\nПузырьком: \n";
+        cout << "\nBubble ыщке: \n";
         sorting.print_array(arr_copy, len);
 
         copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));
         sorting.insertion_sorting(arr_copy, len);
-        cout << "\nВставками: \n";
+        cout << "\nthe insertion sort: \n";
         sorting.print_array(arr_copy, len);
 
         copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));
         sorting.sorting_by_choice(arr_copy, len);
-        cout << "\nВыбором: \n";
+        cout << "\nsorting by Choice: \n";
         sorting.print_array(arr_copy, len);
 
     }

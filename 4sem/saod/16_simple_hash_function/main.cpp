@@ -22,7 +22,7 @@ int main(){
         cout << "\nSelect action:\n"
         "0) Exit\n"
         "1) Find a string\n"
-        "Выбрать: ";
+        "Select: ";
         cin >> choice;
         if (choice > 1)
             continue;

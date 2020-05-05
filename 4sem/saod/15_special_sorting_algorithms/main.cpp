@@ -22,7 +22,7 @@ int main(){
         "2) pocket sorting without support array\n"
         "3) sort an array of size 1000\n"
         "4) sort an array of size 10000\n"
-        "Выбрать: ";
+        "Select: ";
         cin >> choice;
         if (choice > 4)
             continue;

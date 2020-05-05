@@ -10,12 +10,12 @@ int main(){
 
     while (choice != 0){
         cout << "\nSelect action:\n"
-        "0) Выход\n"
-        "1) Поиск вершины\n"
-        "2) Добавление левого или правого потомка\n"
-        "3) Построчный вывод дерева\n"
-        "4) Уничтожение всего дерева\n"
-        "Выбрать: ";
+        "0) Exit\n"
+        "1) Search for a vertex\n"
+        "2) Adding a left or right child\n"
+        "3) Line-by-line output of the tree\n"
+        "4) The destruction of the entire tree\n"
+        "Select: ";
 
         cin >> choice;
         TreeNode* search_res = nullptr;
@@ -26,20 +26,20 @@ int main(){
 
         case 1:
             {
-            cout << "Введите значение для поиска: ";
+            cout << "Enter the value to search for: ";
             cin >> search_value;
             tree->search(&search_res, tree->pRoot, search_value, false);
             if (search_res != nullptr)
-                cout << "Элемент " << search_res->data << 
-                " найден в дереве\n";
+                cout << "Item " << search_res->data << 
+                " FOUND :)\n";
             else
-                cout << "\nТакого элемента в дереве не найдено\n";
+                cout << "\nNo such item :(\n";
             
             break;
             }
         case 2:
             
-            cout << "\nВведите значение для добавления в дерево: ";
+            cout << "\nEnter a value to add to the tree: ";
             cin >> insert_value;
             if (tree->pRoot == nullptr)
             {
@@ -49,20 +49,20 @@ int main(){
             {
                 int direction;
 
-                cout << "\nВведите значение для поиска: ";
+                cout << "\nEnter the value to search for: ";
                 cin >> search_value;
                 tree->search(&search_res, tree->pRoot, search_value, false);
                 if (search_res == nullptr)
                 {
-                    cout << "\nТакого элемента в дереве не найдено\n";
+                    cout << "\nNo such item :(\n";
                     break;
                 }
                 else if (search_res->right == nullptr && search_res->left == nullptr)
                 {
                     cout << endl <<
-                            "0) Влево\n"
-                            "1) Вправо\n"
-                            "Выбрать: ";
+                            "0) left\n"
+                            "1) right\n"
+                            "select: ";
                     cin >> direction;
                     if (direction == 0)
                         tree->add_node(&(search_res->left), insert_value);
@@ -75,24 +75,24 @@ int main(){
                 else if (search_res->right == nullptr)
                     tree->add_node(&(search_res->right), insert_value);
                 else
-                    cout << "\nНет свободных потомков\n";
+                    cout << "\nThere are no available childs\n";
             }
             break;
 
         case 3:
             if (tree->pRoot == nullptr)
             {
-                cout << "\nДерево пустое\n";
+                cout << "\nThe tree is empty\n";
                 break ;
             }
             int pass;
             cout << endl <<
-                        "0) Прямой обход\n"
-                        "1) Симметричный обход\n"
-                        "2) Обратный симметричный обход\n"
-                        "Выбрать: ";
+                        "0) Direct\n"
+                        "1) Symmetrical\n"
+                        "2) Reverse symmetric\n"
+                        "Select: ";
             cin >> pass;
-            cout << "\n\n Дерево:\n-----------------------\n\n"; 
+            cout << "\n\n Tree:\n-----------------------\n\n"; 
             if (pass == 0)
                 tree->forward(tree->pRoot, 0);
             else if (pass == 1)
@@ -104,7 +104,7 @@ int main(){
             
         case 4:
             tree->destr(tree->pRoot);
-            cout << "\nДерево успешно удалено\n";
+            cout << "\nThe tree was successfully deleted\n";
             tree->pRoot = nullptr;
             break;
         

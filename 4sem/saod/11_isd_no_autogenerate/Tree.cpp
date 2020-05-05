@@ -111,7 +111,7 @@ void Tree::destr(TreeNode* pCurrent)
     {
         destr(pCurrent->left);
         destr(pCurrent->right);
-        cout << "Вершина " << pCurrent->data << " удалется ...\n";
+        cout << "vertex " << pCurrent->data << " is removing ...\n";
         delete pCurrent;
     }
 }

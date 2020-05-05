@@ -26,7 +26,7 @@ int main(){
         "3) print hash table\n"
         "4) delete key_word\n"
         "5) load the prepared list of 20 keywords\n"
-        "Выбрать: ";
+        "Select: ";
         cin >> choice;
         if (choice > 5)
             continue;
