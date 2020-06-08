@@ -8,7 +8,7 @@ struct NodeNum
     int data;
 };
 
-class SubList
+struct SubList
 {
 private:
     int currentSize = 0;

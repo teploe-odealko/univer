@@ -49,7 +49,7 @@ int HashTable::add_key(string new_key)
 
         comparisons++;
         if (hash_table[index] == "")
-            break;        
+            break;
     }
 
     if (i == m)

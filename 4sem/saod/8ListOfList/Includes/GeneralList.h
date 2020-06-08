@@ -9,7 +9,7 @@ struct NodeLL
     SubList* data;
 };
 
-class GeneralList
+struct GeneralList
 {
 private:
     int currentSize = 0;

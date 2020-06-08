@@ -3,11 +3,6 @@
 #include <iostream>
 using namespace std;
 
-int generate_int()
-{
-    return rand() % 100 + 1;
-}
-
 Tree::Tree()
 {
     // this->n_vertices = n_vertices;
@@ -29,21 +24,52 @@ void Tree::search(TreeNode *&res, TreeNode *pCurrent, int value, bool is_finded)
     }
 }
 
+
+
+void Changer(TreeNode*& p, TreeNode*& pTemp){
+    if (p->right != nullptr)
+        Changer(p->right, pTemp);
+    else {
+        pTemp->data = p->data;
+        pTemp = p;
+        p = p->left;
+    }
+}
+
 void Tree::destr_vert(TreeNode *&pCurrent, int value, bool &is_finded)
 {
-    if (pCurrent != nullptr && !is_finded)
+    // is_finded = true;
+    if (pCurrent == nullptr){return;}
+    else if (value < pCurrent->data)
     {
-        if ((pCurrent)->data == value)
-        {
-            is_finded = true;
-            destr_tree(pCurrent);
-            pCurrent = nullptr;
-            return ;
-        }
-        // cout << pCurrent->data << endl;
-        destr_vert((pCurrent)->left, value, is_finded);
-        destr_vert((pCurrent)->right, value, is_finded);
+        destr_vert(pCurrent->left, value, is_finded);
     }
+    else if (value > pCurrent->data)
+        destr_vert(pCurrent->right, value, is_finded);
+    else {
+        cout << pCurrent->data;
+        TreeNode* pTemp;
+        pTemp = pCurrent;
+        if (pTemp->right == nullptr)
+        {
+            pCurrent = pTemp->left;
+        }
+            
+        else if (pTemp->left == nullptr) 
+        {
+            pCurrent = pTemp->right;
+        }
+            
+        else
+        {
+            Changer(pCurrent->left, pTemp);
+            
+        }
+        delete pTemp;
+        is_finded = true;
+        
+    }
+    
 }
 
 void Tree::add_node_recursive(TreeNode **pCurrent, int value)

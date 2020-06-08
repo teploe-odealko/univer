@@ -15,7 +15,7 @@ using namespace std;
     
 // };
 
-class HashTable
+struct HashTable
 {
 private:
     // int n_vertices;

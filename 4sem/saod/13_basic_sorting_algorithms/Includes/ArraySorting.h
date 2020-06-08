@@ -10,7 +10,7 @@
     
 // };q
 
-class ArraySorting
+struct ArraySorting
 {
 private:
     // int n_vertices;

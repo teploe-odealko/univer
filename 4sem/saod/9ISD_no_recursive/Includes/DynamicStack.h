@@ -16,7 +16,7 @@ struct StackNode
     int level;
 };
 
-class DynamicStack
+struct DynamicStack
 {
 private:
     int size = -1; 
@@ -32,6 +32,5 @@ public:
     StackNode* getTopPtr();
     bool isEmpty();
     ~DynamicStack();
-
 };
 

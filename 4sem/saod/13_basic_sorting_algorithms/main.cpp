@@ -42,7 +42,7 @@ int main(){
 
         copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));
         sorting.bubble_sorting(arr_copy, len);
-        cout << "\nBubble ыщке: \n";
+        cout << "\nBubble sort: \n";
         sorting.print_array(arr_copy, len);
 
         copy(&(arr[0]), &(arr[len]), &(arr_copy[0]));

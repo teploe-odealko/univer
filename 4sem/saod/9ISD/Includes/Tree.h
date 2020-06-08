@@ -8,7 +8,7 @@ struct Node
     int data;
 };
 
-class Tree
+struct Tree
 {
 private:
     // int n_vertices;
@@ -22,6 +22,5 @@ public:
     void forward(Node*, int);
     void symmetric(Node*, int);
     void backward_symmetric(Node*, int);
-    
 };
 

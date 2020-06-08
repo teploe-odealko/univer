@@ -94,7 +94,7 @@ void ArraySorting::shell_sort(int arr[], int len)
     int k;
     for (k = n_step - 1; k >= 0; k--)
     {
-        cout << k << endl;
+        // cout << k << endl;
         steps[n_step-1-k] = pow(2, k+1) - 1;
     }
     // print_array(steps, n_step);

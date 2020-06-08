@@ -3,6 +3,11 @@
 
 using namespace std;
 
+int generate_int()
+{
+    return rand() % 100 + 1;
+}
+
 int main(){
     // int n_vertices;
     Tree *tree = new Tree();
@@ -12,9 +17,10 @@ int main(){
         cout << "\nSelect action:\n"
         "0) Exit\n"
         "1) Search for a vertex\n"
-        "2) Adding a vertex\n"
-        "3) The output of the tree\n"
-        "4) The destruction of the given node\n"
+        "2) Adding a several random vertexes\n"
+        "3) Adding a vertex\n"
+        "4) The output of the tree\n"
+        "5) The destruction of the given node\n"
         "Select: ";
 
         cin >> choice;
@@ -22,6 +28,8 @@ int main(){
         int insert_value;
         int search_value;
         int to_remove;
+        int tree_size;
+        int ch;
         bool res;
 
         switch (choice){
@@ -39,11 +47,32 @@ int main(){
             
             break;
             }
+
         case 2:
+            cout << "Enter the amount of vertexes: ";
+            cin >> tree_size;
+
+            
+            cout << endl <<
+                "0) Iterative method\n"
+                "1) Recursive method\n"
+                "Select: ";
+            cin >> ch;
+            if (ch == 0)
+            {
+                for (int i = 0; i < tree_size; i++)
+                    tree->add_node_iterative(generate_int());
+            }
+            else if (ch == 1)
+                for (int i = 0; i < tree_size; i++)
+                    tree->add_node_recursive(&(tree->pRoot), generate_int());
+            break;
+
+
+        case 3:
             
             cout << "\nEnter a value to add to the tree: ";
             cin >> insert_value;
-            int ch;
             cout << endl <<
                 "0) Iterative method\n"
                 "1) Recursive method\n"
@@ -53,37 +82,10 @@ int main(){
                 tree->add_node_iterative(insert_value);
             else if (ch == 1)
                 tree->add_node_recursive(&(tree->pRoot), insert_value);
-                // cout << "\nВведите значение для поиска: ";
-                // cin >> search_value;
-                // tree->search(&search_res, tree->pRoot, search_value, false);
-                // if (search_res == nullptr)
-                // {
-                //     cout << "\nТакого элемента в дереве не найдено\n";
-                //     break;
-                // }
-            //     else if (search_res->right == nullptr && search_res->left == nullptr)
-            //     {
-            //         cout << endl <<
-            //                 "0) Влево\n"
-            //                 "1) Вправо\n"
-            //                 "Выбрать: ";
-            //         cin >> direction;
-            //         if (direction == 0)
-            //             tree->add_node(&(search_res->left), insert_value);
-            //         else if (direction == 1)
-            //             tree->add_node(&(search_res->right), insert_value);
-            //         break ;
-            //     }
-            //     if (search_res->left == nullptr)
-            //         tree->add_node(&(search_res->left), insert_value);
-            //     else if (search_res->right == nullptr)
-            //         tree->add_node(&(search_res->right), insert_value);
-            //     else
-            //         cout << "\nНет свободных потомков\n";
-            // }
+
             break;
 
-        case 3:
+        case 4:
             if (tree->pRoot == nullptr)
             {
                 cout << "\nThe tree is empty\n";
@@ -103,7 +105,7 @@ int main(){
             cout << "\n-----------------------\n";
             break;
             
-        case 4:
+        case 5:
             
             cout << "\nEnter the vertex value to delete: ";
             cin >> to_remove;

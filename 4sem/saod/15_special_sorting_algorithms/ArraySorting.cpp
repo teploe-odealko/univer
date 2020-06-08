@@ -7,11 +7,42 @@ using namespace std;
 
 ArraySorting::ArraySorting(){}
 
+
+
+void swap (int *a, int *b)  
+{  
+    int temp = *a;  
+    *a = *b;  
+    *b = temp;  
+} 
+
+void randomize (int arr[], int n)  
+{  
+
+    srand (time(NULL));   
+    for (int i = n - 1; i > 0; i--)  
+    {  
+        int j = rand() % (i + 1);  
+        swap(&arr[i], &arr[j]);  
+    }  
+}  
+
+void ArraySorting::generate_array_for_pocket_sorting(int arr[], int len)
+{
+    for (int i = 0; i < len; i++)
+        arr[i] = i;
+            
+    randomize(arr, len);
+    
+}
+
 void ArraySorting::print_array(int arr[], int len)
 {
     for (int i = 0; i < len; i++)
-        cout << arr[i] << " ";    
+        cout << arr[i] << " ";
 }
+
+
 
 void my_swap(int& a, int& b)
 {
@@ -51,12 +82,15 @@ void ArraySorting::pocket_sorting_same_keys(int arr[], int len, int num_of_keys)
     int j = 0;
     for (int i = 0; i < num_of_keys; i++)
     {
-        Node* pCurrent = keys_list[i].pHead->next;
-        while (pCurrent != nullptr)
+        if (keys_list[i].pHead->next != nullptr)
         {
-            arr[j] = pCurrent->data;
-            pCurrent = pCurrent->next;
-            j++;
+            Node* pCurrent = keys_list[i].pHead->next;
+            while (pCurrent != nullptr)
+            {
+                arr[j] = pCurrent->data;
+                pCurrent = pCurrent->next;
+                j++;
+            }
         }
     }
 }

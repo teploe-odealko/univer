@@ -8,7 +8,7 @@ struct Node
 };
 
 
-class DynamicList
+struct DynamicList
 {
 private:
     Node* last;

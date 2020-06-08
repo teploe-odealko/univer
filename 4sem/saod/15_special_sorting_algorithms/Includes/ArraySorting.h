@@ -10,7 +10,7 @@
     
 // };q
 
-class ArraySorting
+struct ArraySorting
 {
 private:
     // int n_vertices;
@@ -29,4 +29,5 @@ public:
     void pocket_sorting(int[], int);
     void pocket_sorting_same_keys(int[], int, int);
     void k_bit_sorting(int[], int, int);
+    void generate_array_for_pocket_sorting(int[], int);
 };

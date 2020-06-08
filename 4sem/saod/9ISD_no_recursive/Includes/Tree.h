@@ -4,7 +4,7 @@
 
 
 
-class Tree
+struct Tree
 {
 private:
     // int n_vertices;
